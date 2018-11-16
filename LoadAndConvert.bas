@@ -1,4 +1,7 @@
-Attribute VB_Name = "LoadnConvert"
+Attribute VB_Name = "LoadAndConvert"
+Public delimiter As String
+
+
 Sub LoadnConvert()
 
 Dim pathPDF As String, textPDF As String
@@ -47,7 +50,7 @@ Else
     For Each Row In textArray
         Dim Col() As String
         'IMPORTANT: DELIMITER THAT SPLITS THE DATA INTO CELLS
-        Col = Split(Row, " ")
+        Col = Split(Row, delimiter)
         For i = LBound(Col) To UBound(Col)
             ActiveSheet.Cells(j, i + 1) = Col(i)
         Next i

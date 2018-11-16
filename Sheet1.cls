@@ -24,3 +24,10 @@ Private Sub CommandButton3_Click()
     ActiveSheet.UsedRange.ClearContents
     resetSheet
 End Sub
+
+Private Sub CommandButton4_Click()
+Dim delimInput As Variant
+delimInput = InputBox("Please provide the new delimiter: ")
+delimiter = CStr(delimInput)
+ActiveSheet.CommandButton4.Caption = "Current delimiter: " & delimiter
+End Sub
