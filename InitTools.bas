@@ -32,3 +32,14 @@ ActiveSheet.CommandButton4.Visible = True
 
 End Sub
 
+'Public Sub DeleteElementAt(ByVal index As Integer, ByRef prLst As Variant)
+'       Dim i As Integer
+'
+'        ' Move all element back one position
+'        For i = index + 1 To UBound(prLst)
+'            prLst(i - 1) = prLst(i)
+'        Next
+'
+        ' Shrink the array by one, removing the last one
+'        ReDim Preserve prLst(Len(prLst) - 1)
+'End Sub

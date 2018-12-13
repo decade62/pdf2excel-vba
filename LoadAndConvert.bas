@@ -43,18 +43,35 @@ Else
     AppActivate ActiveWorkbook.Windows(1).Caption
     objPDF.GetFromClipboard
     textPDF = objPDF.GetText(1)
+    'CORRECTION | HAF-specific pdf report -----------------
+    'etos gennhshs, diaforoi xarakthres - diorthwsh
+    textPDF = Replace(textPDF, (ChrW("&H0388") & ChrW("&H03C4") & ChrW("&H03BF") & ChrW("&H03C2") & vbCrLf), (ChrW("&H0388") & ChrW("&H03C4") & ChrW("&H03BF") & ChrW("&H03C2") & "_"))
+    textPDF = Replace(textPDF, " / ", "/")
+    textPDF = Replace(textPDF, " ,", ",")
+    textPDF = Replace(textPDF, ", ", ",")
     textArray = Split(textPDF, vbNewLine)
 
 
     j = 1
     For Each Row In textArray
-        Dim Col() As String
+        Dim Col() As String, tmpCol() As String
         'IMPORTANT: DELIMITER THAT SPLITS THE DATA INTO CELLS
         Col = Split(Row, delimiter)
+        'Concatenate columns that should be together
+        If UBound(Col) = 3 Then
+            Dim joinedCol(2) As String
+            joinedCol(0) = Col(2)
+            If j > 1 And j < UBound(textArray) Then
+                tmpCol = Split(textArray(j + 1), delimiter)
+                joinedCol(1) = tmpCol(0)
+                Col(2) = Join(joinedCol)
+            End If
+        End If
         For i = LBound(Col) To UBound(Col)
             ActiveSheet.Cells(j, i + 1) = Col(i)
         Next i
     j = j + 1
+    previousRow = Row
     Next
 
 End If
