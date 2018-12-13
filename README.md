@@ -1,4 +1,6 @@
 # pdf2excel-vba
+# IGNORE AS THIS IS A SIDE PROJECT.
+# Branch version for generating .xls files from .pdf specific reports
 User Interface in MS Excel that automates the transfer of data from pdf to the spreadsheet.
 The concept is that the text from a pdf file is copied and splitted to rows (by newlines) and columns (by delimiter).
 
